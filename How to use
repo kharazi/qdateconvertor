@@ -1,0 +1,29 @@
+---------------QDateConvertor----------------
+- add qdateconvertor class to your project
+- include qdataconvertor where you want to use qdataconvertor
+- use from QDateConvertor::ToJalali(year,month,day)[return QStringList] function to convert Miladi date to Jalali and 
+  use from QDateConvertor::ToMiladi(year,month,day)[return QStringList] function to convert Jalali date to Miladi
+
+for Example:
+    include <QDebug>
+    include <QDateTime>
+    include "qdateconvertor.h"
+
+
+    QDateConvertor Jalali;
+    QDateTime date =QDateTime::currentDateTime();
+    QStringList shamsi=  Jalali.ToJalali( date.toString("yyyy"), date.toString("MM"),date.toString("dd"));
+    QString JalailDate =shamsi.at(0)+"/"+shamsi.at(1)+"/"+shamsi.at(2);
+    qDebug()<<"JALALI DATE: "<<JalailDate;
+
+    QDateConvertor Miladi;
+    QStringList m= Miladi.ToMiladi("1372","3","6");
+    QString miladiDate= m.at(0)+"/"+ m.at(1)+"/"+m.at(2);
+    qDebug()<<"VAHID BIRTHDAY: "<<miladiDate;
+
+------------------------------------------------
+QDateConvertor Class 
+Copyright 2012 Vahid Kharazi <vahid@kharazi.net>
+Licensed for distribution under the GPL version 3
+vahid@kharazi.net
+------------------------------------------------

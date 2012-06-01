@@ -122,69 +122,55 @@ QStringList QDateConvertor::ToMiladi(QString year, QString month,QString day ){
     int Year;
     int Month;
     int Day;
-    Year=year.toInt();
-//    qDebug()<<"year"<<year<<"/"<<Year;
-    Month=month.toInt();
-    Day=day.toInt();
-    //
 
-//    QStringList farvardin1st ;
+    Year=year.toInt();//Jalali Year
+    Month=month.toInt();//Jalali Month
+    Day=day.toInt();//Jalali Day
+
     QList <int> miladiDate;
     QList <int> farvardin1st;
+    //set default value
     miladiDate<<1<<1<<1;
     farvardin1st<<1<<1<<1;
-//    QStringList miladiDate ;
-//    farvardin1st<<"iYear"<<"iMonth"<<"iDay";
-//    miladiDate<<"iYear"<<"iMonth"<<"iDay";
-
-    qDebug()<<"miladiDate"<<miladiDate[0];
-//    miladiDate[0]=QString::number(10);
-//    qDebug()<<"miladiDate"<<miladiDate[0];
 
     int miladiYear;
     int marchDayDiff;
+
     QList<int> miladiMonth;
     miladiMonth<<30<<31<<30<<31<<31<<30<<31<<30<<31<<31<<28<<31;
 
     miladiYear = Year + 621;
-    qDebug()<<miladiYear;
+
     //Detemining the Farvardin the First
     if (QDate::isLeapYear(miladiYear)){
         //this is a Miladi leap year so Shamsi is leap too so the 1st of Farvardin is March 20 (3/20)
-        qDebug()<<"is leap";
-        farvardin1st[1] =3; // iMonth
-        farvardin1st[2]= 20; // iDay
+        farvardin1st[1] =3; // change default values
+        farvardin1st[2]= 20;
         marchDayDiff = 12;
 
 
     }else{
         //this is not a Miladi leap year so Shamsi is not leap too so the 1st of Farvardin is March 21 (3/21)
-        qDebug()<<"none leap";
         farvardin1st[1] = 3;
         farvardin1st[2] =21;
         marchDayDiff = 11;
     }
 
     if (QDate::isLeapYear(miladiYear+1)){
-        qDebug()<<"leap";
+
         miladiMonth[10] = miladiMonth[10] + 1; //Adding one day to Feb
 
     }
     //Calculate the day count for input shamsi date from 1st Farvadin
 
     if (Month >=1 && Month<=6){
-        qDebug()<<"1<  <6";
 
         dayCount = ((Month-1) * 31) + Day;
 
     }else{
-        qDebug()<<"Month"<<Month;
 
         dayCount =(6 * 31) + ((Month - 7) * 30) + Day;
     }
-
-//    qDebug()<<miladiMonth[5];
-//    qDebug()<<farvardin1st[0];
 
     //Finding the correspond miladi month and day
     int remainDay;
@@ -217,13 +203,8 @@ QStringList QDateConvertor::ToMiladi(QString year, QString month,QString day ){
 
     }
 
-
-//    qDebug()<<miladiDate[0];
-//    qDebug()<<miladiDate[1];
-//    qDebug()<<miladiDate[2];
     QStringList mymiladiDate;
     mymiladiDate <<QString::number(miladiDate[0])<<QString::number(miladiDate[1])<<QString::number(miladiDate[2]);
-//    qDebug()<<"fas"<<mymiladiDate[0];
     return mymiladiDate;
 
 

@@ -23,36 +23,14 @@ void QDateConvertor::set_months(){
     Month[11]=QString::fromUtf8("بهمن");
     Month[12]=QString::fromUtf8("اسفند");
 }
-
-QString QDateConvertor::DayName(QString MiladiDayName){
-    if (MiladiDayName=="Saturday"){
-        QString dayname = QString::fromUtf8("شنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Sunday"){
-        QString dayname = QString::fromUtf8("یکشنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Monday"){
-        QString dayname = QString::fromUtf8("دوشنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Tuesday"){
-        QString dayname = QString::fromUtf8("سه شنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Wednesday"){
-        QString dayname = QString::fromUtf8("چهار شنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Thursday"){
-        QString dayname = QString::fromUtf8("پنجشنبه");
-        return dayname;
-    }
-    if (MiladiDayName=="Friday"){
-        QString dayname = QString::fromUtf8("آدینه");
-        return dayname;
-    }
+void QDateConvertor::set_days(){
+    Day["Saturday"]=QString::fromUtf8("شنبه");
+    Day["Sunday"]=QString::fromUtf8("یکشنبه");
+    Day["Monday"]=QString::fromUtf8("دوشنبه");
+    Day["Tuesday"]=QString::fromUtf8("سه شنبه");
+    Day["Wednesday"]=QString::fromUtf8("چهارشنبه");
+    Day["Thursday"]=QString::fromUtf8("پنجشنبه");
+    Day["Friday"]=QString::fromUtf8("آدینه");
 }
 
 bool QDateConvertor::is_leap(int year){
@@ -215,7 +193,8 @@ QStringList QDateConvertor::ToMiladi(QString year, QString month,QString day ){
 }
 
 QStringList QDateConvertor::Today(){
+   set_days();
    QStringList Date=  this->ToJalali( today.toString("yyyy"), today.toString("MM"),today.toString("dd"));
-   Date<<this->DayName(today.toString("dddd"));
+   Date<<Day[today.toString("dddd")];
    return Date;
 }

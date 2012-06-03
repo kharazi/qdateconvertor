@@ -1,0 +1,44 @@
+*********************************************************
+*******************The instructions**********************
+*********************************************************
+*- add qdateconvertor class to your project
+*- include qdataconvertor where you want to use qdataconvertor
+*- use from QDateConvertor::ToJalali(year,month,day)[return QStringList] function to convert Miladi date to Jalali and 
+*  use from QDateConvertor::ToMiladi(year,month,day)[return QStringList] function to convert Jalali date to Miladi
+
+for Example:
+       include <QDebug>
+       include "qdateconvertor.h"
+
+       //leap year[sale kabise] in Jalali Calender
+       QDateConvertor mdate;
+       qDebug()<<"is leap year? "<<mdate.is_leap(1391);
+
+       //current time in Jalali Calender
+       QStringList today= mdate.Today();
+       qDebug()<<today.at(0)<<"/"<<today.at(1)<<"/"<<today.at(2)<<"/"<<today.at(3)<<"/"<<today.at(4);
+
+       //current time in Miladi Calender
+       qDebug()<<" current time: ";
+       qDebug()<<mdate.today.toString("yyyy")<<mdate.today.toString("MM")<<mdate.today.toString("dd");
+
+       //cuurent time
+       qDebug()<<"time is:"<<mdate.today.toString("hh:mm");
+
+       //convert miladi to Jalali
+       QStringList shamsi=  mdate.ToJalali( "2001","9","11");
+       QString JalailDate =shamsi.at(0)+"/"+shamsi.at(1)+"/"+shamsi.at(2)+ ":" +shamsi.at(3);
+       qDebug()<<JalailDate;
+
+       //convert Miladi to jalali
+       QStringList m= mdate.ToMiladi("1372","3","6");
+
+       QString miladiDate= m.at(0)+"/"+ m.at(1)+"/"+m.at(2);
+       qDebug()<<"VAHID BIRTHDAY: "<<miladiDate;
+
+******************************************************
+***************QDateConvertor Class*******************
+***Copyright 2012 Vahid Kharazi <vahid@kharazi.net>***
+***Licensed for distribution under the GPL version3***
+******************************************************
+******************************************************/

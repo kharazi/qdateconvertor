@@ -40,11 +40,20 @@
 *
 *
 *    QDateConvertor Jalali;
+*
+*    //check kardane sal haye kabise
+*    qDebug()<<"Check leap year in Jalali Claender:"<<Jalali.is_leap(1391);//print true
+*
+*    //Today Date in Jalali Calender
+*    QStringList today= Jalali.Today();
+*    qDebug()<<today.at(0)<<"/"<<today.at(1)<<"/"<<today.at(2)<<"Day:"<<today.at(3);
+*
+*    //Convert Miladi day to Jalali
 *    QDateTime date =QDateTime::currentDateTime();
 *    QStringList shamsi=  Jalali.ToJalali( date.toString("yyyy"), date.toString("MM"),date.toString("dd"));
 *    QString JalailDate =shamsi.at(0)+"/"+shamsi.at(1)+"/"+shamsi.at(2);
 *    qDebug()<<"JALALI DATE: "<<JalailDate;
-or:
+*    //con
 *    QDateConvertor Miladi;
 *    QStringList m= Miladi.ToMiladi("1372","3","6");
 *    QString miladiDate= m.at(0)+"/"+ m.at(1)+"/"+m.at(2);
@@ -57,20 +66,28 @@ or:
 *------------------------------------------------
 ******************************************************/
 
-
 #include <QStringList>
 #include <QDate>
 #include <QList>
+#include <QMap>
+
 class QDateConvertor
 {
-public:
-    QDateConvertor();
+private:
     int div(int,int);
-    bool is_leap(int year);
+    QMap<int,QString> Month;
+    void set_months();
+    void set_days();
+
+public:
+
+    QDateConvertor();
+    bool is_leap(int year);//year is in Jalali Calender in range:[1244,1472]
     QStringList ToJalali(QString year, QString month,QString day);
     QStringList ToMiladi(QString year, QString month,QString day);
-    int dayCount;
-
+    QStringList Today();//return Jalali currentDateTime
+    QDateTime today;//today =QDateTime::currentDateTime();// Miladi
+    QString DayName(QString MiladiDayName);
 };
 
 #endif // QDATECONVERTOR_H
